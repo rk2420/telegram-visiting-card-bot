@@ -205,7 +205,8 @@ TEXT:
         update.message.from_user.id,
         scan_time.strftime("%Y-%m-%d %H:%M:%S")
     )
-services_text = "\n- ".join(data.get("services", [])) if data.get("services") else "Not Found"
+    services_text = "\n- ".join(data.get("services", [])) if data.get("services") else "Not Found"
+
     reply = f"""
 📇 Visiting Card Details
 
@@ -260,4 +261,5 @@ app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
 
 print("🚀 Bot is LIVE and listening...")
 app.run_polling()
+
 
