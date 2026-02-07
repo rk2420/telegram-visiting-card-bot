@@ -205,20 +205,20 @@ TEXT:
         update.message.from_user.id,
         scan_time.strftime("%Y-%m-%d %H:%M:%S")
     )
-
+services_text = "\n- ".join(data.get("services", [])) if data.get("services") else "Not Found"
     reply = f"""
 📇 Visiting Card Details
 
-Name: {data['name']}
-Designation: {data['designation']}
-Company: {data['company']}
-Phone: {data['phone']}
-Email: {data['email']}
-Website: {data['website']}
-Address: {data['address']}
-Industry: {data['industry']}
+Name: {data.get('name', 'Not Found')}
+Designation: {data.get('designation', 'Not Found')}
+Company: {data.get('company', 'Not Found')}
+Phone: {data.get('phone', 'Not Found')}
+Email: {data.get('email', 'Not Found')}
+Website: {data.get('website', 'Not Found')}
+Address: {data.get('address', 'Not Found')}
+Industry: {data.get('industry', 'Not Found')}
 Services:
-- {'\n- '.join(data['services'])}
+- {services_text}
 
 🕒 Scanned On: {formatted_time}
 """
@@ -260,3 +260,4 @@ app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
 
 print("🚀 Bot is LIVE and listening...")
 app.run_polling()
+
